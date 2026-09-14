@@ -1,0 +1,261 @@
+---
+title: "production_component_rules.yaml"
+version: "1.3"
+status: "Pending Owner Verification"
+last_verified: "2026-08-25"
+owner: "SpicedAnime"
+authors:
+  - Josh
+  - Josiah
+primary_systems:
+  - SpicedAnime Fulfillment Web App
+  - Production Batch Engine
+database_dependencies:
+  - product_families
+  - configuration_components
+core_lifecycle_states:
+  - Deferred MVP
+---
+
+version: "1.3"
+last_verified: "2026-08-25"
+status: "Pending Owner Verification"
+source_document: "docs/01_source_of_truth/Production_Component_Decomposition_Rules.md"
+
+families:
+  - family_code: ASH
+    family_name: Ashtray
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: true
+    print_document_required: true
+    packing_sheet_required: true
+    default_batch_group: Ashtray
+    configurations:
+      - config_code: SOLO
+        components:
+          - { code: ASH, quantity: 1, batch_group: Ashtray }
+      - config_code: ASHGRD
+        components:
+          - { code: ASH, quantity: 1, batch_group: Ashtray }
+          - { code: GRD, quantity: 1, batch_group: Grinder/Jar/Tray }
+
+  - family_code: BAT
+    family_name: Black Art Tapestry
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: false
+    print_document_required: false
+    packing_sheet_required: true
+    default_batch_group: None
+    configurations:
+      - config_code: NONE
+        components: []
+
+  - family_code: LIT
+    family_name: Flip Lighter
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: true
+    print_document_required: true
+    packing_sheet_required: true
+    default_batch_group: Lighter
+    configurations:
+      - config_code: SOLO
+        components:
+          - { code: LITF, quantity: 1, batch_group: Lighter }
+          - { code: LITB, quantity: 1, batch_group: Lighter }
+      - config_code: LITTIN
+        components:
+          - { code: LITF, quantity: 1, batch_group: Lighter }
+          - { code: LITB, quantity: 1, batch_group: Lighter }
+          - { code: TIN, quantity: 1, batch_group: Tin }
+      - config_code: TINONLY
+        components:
+          - { code: TIN, quantity: 1, batch_group: Tin }
+
+  - family_code: GRS
+    family_name: Grinder Sets
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: true
+    print_document_required: true
+    packing_sheet_required: true
+    default_batch_group: Grinder/Jar/Tray
+    configurations:
+      - config_code: GRDONLY
+        components:
+          - { code: GRD, quantity: 1, batch_group: Grinder/Jar/Tray }
+      - config_code: JARONLY
+        components:
+          - { code: JAR, quantity: 1, batch_group: Grinder/Jar/Tray }
+      - config_code: TRYONLY
+        components:
+          - { code: TRY, quantity: 1, batch_group: Grinder/Jar/Tray }
+      - config_code: GRDJAR
+        components:
+          - { code: GRD, quantity: 1, batch_group: Grinder/Jar/Tray }
+          - { code: JAR, quantity: 1, batch_group: Grinder/Jar/Tray }
+      - config_code: GRDTRY
+        components:
+          - { code: GRD, quantity: 1, batch_group: Grinder/Jar/Tray }
+          - { code: TRY, quantity: 1, batch_group: Grinder/Jar/Tray }
+      - config_code: JARTRY
+        components:
+          - { code: JAR, quantity: 1, batch_group: Grinder/Jar/Tray }
+          - { code: TRY, quantity: 1, batch_group: Grinder/Jar/Tray }
+      - config_code: GRDSET
+        components:
+          - { code: GRD, quantity: 1, batch_group: Grinder/Jar/Tray }
+          - { code: JAR, quantity: 1, batch_group: Grinder/Jar/Tray }
+          - { code: TRY, quantity: 1, batch_group: Grinder/Jar/Tray }
+
+  - family_code: GRD
+    family_name: Herb Grinder
+    is_sold: true
+    is_site_active: true
+    implementation_status: Ignored for MVP
+    deferred_mvp: true
+    production_required: false
+    print_document_required: false
+    packing_sheet_required: true
+    default_batch_group: None
+    configurations:
+      - config_code: SOLO
+        components: []
+
+  - family_code: HOD
+    family_name: Hoodie
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: false
+    print_document_required: false
+    packing_sheet_required: true
+    default_batch_group: None
+    configurations:
+      - config_code: NONE
+        components: []
+
+  - family_code: PIL
+    family_name: Pillow Cover
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: false
+    print_document_required: false
+    packing_sheet_required: true
+    default_batch_group: None
+    configurations:
+      - config_code: NONE
+        components: []
+
+  - family_code: TRY
+    family_name: Rolling Tray
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: true
+    print_document_required: true
+    packing_sheet_required: true
+    default_batch_group: Grinder/Jar/Tray
+    configurations:
+      - config_code: SOLO
+        components:
+          - { code: TRY, quantity: 1, batch_group: Grinder/Jar/Tray }
+
+  - family_code: BOX
+    family_name: Stash Box
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: true
+    print_document_required: true
+    packing_sheet_required: true
+    default_batch_group: Box
+    configurations:
+      - config_code: SOLO
+        components:
+          - { code: BOX, quantity: 1, batch_group: Box }
+      - config_code: BOXGRD
+        components:
+          - { code: BOX, quantity: 1, batch_group: Box }
+          - { code: GRD, quantity: 1, batch_group: Grinder/Jar/Tray }
+      - config_code: BOXJAR
+        components:
+          - { code: BOX, quantity: 1, batch_group: Box }
+          - { code: JAR, quantity: 1, batch_group: Grinder/Jar/Tray }
+      - config_code: BOXLIT
+        components:
+          - { code: BOX, quantity: 1, batch_group: Box }
+          - { code: LITF, quantity: 1, batch_group: Lighter }
+          - { code: LITB, quantity: 1, batch_group: Lighter }
+      - config_code: BOX4
+        components:
+          - { code: BOX, quantity: 1, batch_group: Box }
+          - { code: LITF, quantity: 1, batch_group: Lighter }
+          - { code: LITB, quantity: 1, batch_group: Lighter }
+          - { code: GRD, quantity: 1, batch_group: Grinder/Jar/Tray }
+          - { code: JAR, quantity: 1, batch_group: Grinder/Jar/Tray }
+
+  - family_code: JAR
+    family_name: Stash Jar
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: true
+    print_document_required: true
+    packing_sheet_required: true
+    default_batch_group: Grinder/Jar/Tray
+    configurations:
+      - config_code: SOLO
+        components:
+          - { code: JAR, quantity: 1, batch_group: Grinder/Jar/Tray }
+
+  - family_code: TAP
+    family_name: Tapestry
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: false
+    print_document_required: false
+    packing_sheet_required: true
+    default_batch_group: None
+    configurations:
+      - config_code: NONE
+        components: []
+
+  - family_code: TOT
+    family_name: Tote Bag
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: false
+    print_document_required: false
+    packing_sheet_required: true
+    default_batch_group: None
+    configurations:
+      - config_code: NONE
+        components: []
+
+  - family_code: WAL
+    family_name: Wallet
+    is_sold: true
+    is_site_active: true
+    implementation_status: MVP
+    production_required: true
+    print_document_required: true
+    packing_sheet_required: true
+    default_batch_group: Wallet
+    configurations:
+      - config_code: WALFONLY
+        components:
+          - { code: WALF, quantity: 1, batch_group: Wallet }
+      - config_code: WALFB
+        components:
+          - { code: WALF, quantity: 1, batch_group: Wallet }
+          - { code: WALB, quantity: 1, batch_group: Wallet }

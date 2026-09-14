@@ -1,0 +1,85 @@
+/* SpicedAnime Fulfillment — Effects: radii, borders, shadows, motion, textures
+   Slightly sharp corners (raw/punk), borders carry elevation on dark, shadows subtle. */
+:root {
+  /* ---- Corner radii (kept tight; avoids generic "soft SaaS" look) ---- */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 5px;   /* default control / card */
+  --radius-lg: 8px;   /* large panels */
+  --radius-pill: 999px;
+
+  /* ---- Border widths ---- */
+  --border-hair: 1px;
+  --border-raw: 1.5px;   /* slightly raw divider accent */
+
+  /* ---- Shadows (dark theme: mostly structural, low elevation) ---- */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-card: 0 1px 0 rgba(255,255,255,0.03) inset, 0 6px 18px rgba(0,0,0,0.38);
+  --shadow-pop: 0 1px 0 rgba(255,255,255,0.04) inset, 0 18px 48px rgba(0,0,0,0.55);
+  --shadow-spice: 0 0 0 1px rgba(255,77,46,0.4), 0 8px 24px rgba(255,77,46,0.18);
+
+  /* ---- Focus ---- */
+  --ring: 0 0 0 2px var(--ink-900), 0 0 0 4px var(--focus-ring);
+
+  /* ---- Motion (fast, mechanical — production tool, not playful) ---- */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.3, 1); /* @kind other */
+  --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1); /* @kind other */
+  --dur-fast: 110ms; /* @kind other */
+  --dur-base: 170ms; /* @kind other */
+  --dur-slow: 240ms; /* @kind other */
+
+  /* ---- Texture accents (decorative areas only — headers, empty states) ----
+     WARNING: do NOT use these two tokens as `background-image: var(--tex-…)`.
+     A relative url() inside a custom property resolves against the USING
+     document, not this file, so it 404s on any page below the project root.
+     Use the `.tex-halftone` / `.tex-hatch` classes from tokens/base.css
+     instead. These tokens are kept only for callers that already resolve the
+     path themselves. The stripe tokens below are unaffected — repeating
+     gradients contain no url(). */
+  --tex-halftone: url('../assets/halftone-tile.png'); /* @kind other */
+  --tex-hatch: url('../assets/hatch-tile.png'); /* @kind other */
+
+  /* ---- Diagonal stripe system ----
+     Pure-CSS repeating gradients, so they scale, tint and layer without an
+     asset request. All share one 135deg axis so stripes stay parallel wherever
+     they appear — mixing angles reads as an accident.
+
+     APPROVED PLACEMENTS (2026-09-04): panel headers and empty states.
+
+     THE LEGIBILITY RULE: stripes may never sit behind small text or text that
+     is not bold. They are cleared to sit behind bold uppercase type (panel
+     header titles, eyebrows, empty-state headings) or behind nothing at all.
+     Never behind table data, body copy, muted captions, or metric sub-labels —
+     the stripe edge competes with light letterforms at small sizes.
+
+     Density ladder: `medium` is the panel-header default; `wide` suits empty
+     states and medallions. `hazard` is the loudest fill and has NO approved
+     placement yet — every held panel in the product carries body copy, which
+     the rule above disallows, so DeferredPanel keeps hatch alone. `fine` and
+     `hazard` are for large areas carrying no text.
+     `triple` is the three-stripe BAND motif (three strokes, then a long gap) —
+     a mark, not a fill: one per region, never tiled across a whole surface. */
+  --stripe-angle: 135deg; /* @kind other */
+  --tex-stripe-fine: repeating-linear-gradient(135deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 6px); /* @kind other */
+  --tex-stripe-medium: repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 10px); /* @kind other */
+  --tex-stripe-wide: repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0 6px, transparent 6px 18px); /* @kind other */
+  --tex-stripe-hazard: repeating-linear-gradient(135deg, rgba(255,255,255,0.055) 0 8px, transparent 8px 16px); /* @kind other */
+  --tex-stripe-triple: repeating-linear-gradient(135deg, rgba(255,255,255,0.10) 0 4px, transparent 4px 9px, rgba(255,255,255,0.10) 9px 13px, transparent 13px 18px, rgba(255,255,255,0.10) 18px 22px, transparent 22px 76px); /* @kind other */
+  /* Spice-tinted stripes: decorative emphasis only. Never on a status surface,
+     and never dense enough to read as a Danger or Warning fill. */
+  --tex-stripe-spice: repeating-linear-gradient(135deg, rgba(255,77,46,0.13) 0 2px, transparent 2px 10px); /* @kind other */
+
+  /* ---- SKU segment chips ----
+     A SKU chip strip is an identifier, not a status, so it may never borrow a
+     status tone or the spice accent. The adopted treatment is the TONAL ladder
+     (`tone="value"`), which spends no hue at all. These two hues back the
+     unadopted `tone="role"` variant only; both were chosen to sit clearly
+     outside the six status tones and the pair violet. */
+  --seg-design: #5FB3B3;
+  --seg-design-bg: rgba(95,179,179,0.13);
+  --seg-design-line: rgba(95,179,179,0.42);
+  --seg-option: #C0A97C;
+  --seg-option-bg: rgba(192,169,124,0.13);
+  --seg-option-line: rgba(192,169,124,0.42);
+}

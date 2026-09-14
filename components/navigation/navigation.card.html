@@ -1,0 +1,42 @@
+<!-- @dsCard group="Components" viewport="1180x620" name="Navigation — App Shell, Sidebar, Top Bar" subtitle="AppShell composing Sidebar + TopBar + content" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  html,body { margin:0; height:100%; background:var(--ink-900); font-family:var(--font-sans); }
+  #root { height:620px; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const NS = window.SpicedAnimeSpicyDesignSystem_daab0d;
+  const { AppShell, MetricCard, Button, Icon } = NS;
+  function Demo(){
+    const [active,setActive]=React.useState('dashboard');
+    return (
+      <AppShell
+        active={active} onNavigate={setActive}
+        sidebarProps={{ logoSrc:'../../assets/spicedanime-icon.png', operator:'Josiah' }}
+        topBarProps={{ breadcrumb:['Operations','Dashboard'], title:'Dashboard', onSearch:()=>{}, notifications:3,
+          actions:<Button variant="primary" iconLeft={<Icon name="plus" size={15}/>}>New Batch</Button> }}
+      >
+        <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:16}}>
+          <MetricCard label="Open batches" value="12" icon="layers" accent hint="awaiting print"/>
+          <MetricCard label="Units in production" value="1,284" unit="u" icon="boxes" delta="+8%" trend="up"/>
+          <MetricCard label="Blocked items" value="3" icon="octagon-x" delta="needs review" trend="down"/>
+          <MetricCard label="Shipped today" value="46" icon="truck" delta="+12" trend="up"/>
+        </div>
+      </AppShell>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body>
+</html>

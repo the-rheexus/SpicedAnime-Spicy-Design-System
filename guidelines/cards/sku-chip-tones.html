@@ -1,0 +1,66 @@
+<!-- @dsCard group="Exploration" viewport="1090x350" name="SKU chip colour — three options" subtitle="Pick one: uniform grey (today), tonal by value, or two non-status hues by segment role" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>html,body{margin:0;background:var(--surface-app);font-family:var(--font-sans);color:var(--text-hi)}.pad{padding:20px 22px}.lbl{font-size:9px;font-weight:700;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--text-low)}.cap{font-family:var(--font-mono);font-size:10px;color:var(--text-low)}.sub{font-size:10px;color:var(--text-faint);margin-top:3px;line-height:1.5}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body class="pad">
+<div id="root"></div>
+<script type="text/babel">
+const { SegmentedSku, StatusBadge } = window.SpicedAnimeSpicyDesignSystem_daab0d;
+
+const SKUS = [
+  { sku: 'LIT-DESNAM-SIL-TOR-LITTIN', familyCode: 'LIT', designCode: 'DESNAM', options: { color: 'SIL', flame: 'TOR' }, configCode: 'LITTIN' },
+  { sku: 'ASH-DESGOK-CLR-ASHGRD', familyCode: 'ASH', designCode: 'DESGOK', options: { color: 'CLR' }, configCode: 'ASHGRD' },
+  { sku: 'GRS-DESGOJ-BLK-GRSFULL', familyCode: 'GRS', designCode: 'DESGOJ', options: { color: 'BLK' }, configCode: 'GRSFULL' },
+];
+
+const TONES = [
+  ['none', 'Uniform grey — today', 'Zero colour cost. The strip reads as one object, but every segment weighs the same, so scanning for a design code means reading the whole string.'],
+  ['value', 'Tonal by value', 'Family strongest → config faintest. Adds no hue at all, so it stays safe next to a status badge and inside dense tables. Gives hierarchy without spending colour.'],
+  ['role', 'Hued by role', 'Design gets teal, option gets sand — two hues deliberately outside the six status tones and the pair violet. Fastest to scan; spends the most colour.'],
+];
+
+function App() {
+  return (
+    <div style={{ display: 'grid', gap: 22, gridTemplateColumns: 'repeat(3, 1fr)' }}>
+      {TONES.map(([tone, title, note]) => (
+        <div key={tone}>
+          <div className="lbl">{title}</div>
+          <div className="cap" style={{ marginTop: 3 }}>tone="{tone}"</div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginTop: 14 }}>
+            {SKUS.map((s) => <SegmentedSku key={s.sku} {...s} tone={tone} size="sm" />)}
+          </div>
+
+          {/* In context: chips share a row with a status badge, which is where a
+              colour clash would actually show up. */}
+          <div style={{ background: 'var(--surface-card)', border: '1px solid var(--line)', borderRadius: 'var(--radius-md)', marginTop: 16, overflow: 'hidden' }}>
+            <div style={{ background: 'var(--ink-850)', borderBottom: '1px solid var(--line)', color: 'var(--text-low)', fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', padding: '7px 11px', textTransform: 'uppercase' }}>In a table row</div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {[['Ready', SKUS[0]], ['Blocked', SKUS[2]]].map(([status, s]) => (
+                <div key={status} style={{ alignItems: 'center', borderBottom: '1px solid var(--line-soft)', display: 'flex', gap: 9, padding: '9px 11px' }}>
+                  <StatusBadge status={status} size="sm" />
+                  <SegmentedSku {...s} tone={tone} size="sm" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="sub">{note}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

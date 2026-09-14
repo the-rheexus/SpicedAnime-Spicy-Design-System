@@ -1,0 +1,14 @@
+fixture_file,sku,component_code,quantity,batch_group,artwork_file,status
+shopify_order_single_ashtray.json,ASH-CHARFRIE-SOLO,ASH,1,Ashtray,SpicedAnime/artwork/Ashtray/CHARFRIE.png,Ready
+shopify_order_lighter_tin.json,LIT-DESNAM-SIL-TOR-LITTIN,LITF,1,Lighter,SpicedAnime/artwork/Flip Lighter/DESNAM.png,Ready
+shopify_order_lighter_tin.json,LIT-DESNAM-SIL-TOR-LITTIN,LITB,1,Lighter,SpicedAnime/artwork/Flip Lighter/DESNAM.png,Ready
+shopify_order_lighter_tin.json,LIT-DESNAM-SIL-TOR-LITTIN,TIN,1,Tin,SpicedAnime/artwork/Flip Lighter/DESNAM.png,Ready
+shopify_order_stashbox_set.json,BOX-DESNAM-BOX4,BOX,1,Box,SpicedAnime/artwork/Stash Box/DESNAM/BOX.png,Ready
+shopify_order_stashbox_set.json,BOX-DESNAM-BOX4,LITF,1,Lighter,SpicedAnime/artwork/Stash Box/DESNAM/LIT.png,Ready
+shopify_order_stashbox_set.json,BOX-DESNAM-BOX4,LITB,1,Lighter,SpicedAnime/artwork/Stash Box/DESNAM/LIT.png,Ready
+shopify_order_stashbox_set.json,BOX-DESNAM-BOX4,GRD,1,Grinder/Jar/Tray,SpicedAnime/artwork/Stash Box/DESNAM/GRD.png,Ready
+shopify_order_stashbox_set.json,BOX-DESNAM-BOX4,JAR,1,Grinder/Jar/Tray,SpicedAnime/artwork/Stash Box/DESNAM/JAR.png,Ready
+shopify_order_mixed_products.json,LIT-DESNAM-SIL-TOR-SOLO,LITF,1,Lighter,SpicedAnime/artwork/Flip Lighter/DESNAM.png,Ready
+shopify_order_mixed_products.json,LIT-DESNAM-SIL-TOR-SOLO,LITB,1,Lighter,SpicedAnime/artwork/Flip Lighter/DESNAM.png,Ready
+shopify_order_mixed_products.json,TAP-AKIRA-LRG-NONE,(none),0,None,(none),(none)
+shopify_order_non_produced_only.json,HOD-NARUTO-XL-BLK-NONE,(none),0,None,(none),(none)

@@ -1,0 +1,32 @@
+{
+  "id": 5500000000002,
+  "order_number": 1002,
+  "email": "lighterfan@example.com",
+  "financial_status": "paid",
+  "fulfillment_status": null,
+  "created_at": "2026-06-15T10:02:00-04:00",
+  "currency": "USD",
+  "customer": {
+    "first_name": "Devon",
+    "last_name": "Pierce"
+  },
+  "shipping_address": {
+    "name": "Devon Pierce",
+    "address1": "77 Lakeshore Dr",
+    "city": "Madison",
+    "province": "Wisconsin",
+    "zip": "53703",
+    "country": "United States"
+  },
+  "line_items": [
+    {
+      "id": 13200000000002,
+      "product_id": 7000000000002,
+      "variant_id": 41000000000002,
+      "sku": "LIT-DESNAM-SIL-TOR-LITTIN",
+      "quantity": 1,
+      "title": "Desert Nomad Flip Lighter + Tin",
+      "variant_title": "Silver / Torch / With Tin"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+<!-- @dsCard group="Components" viewport="700x560" name="Core — Buttons, Badges, Forms" subtitle="Buttons, status badges, inputs, select, checkbox, icon buttons" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin:0; background:var(--ink-900); font-family:var(--font-sans); padding:24px; color:var(--text-hi); }
+  .sec { margin-bottom:26px; }
+  .eyebrow { font-size:10px; font-weight:700; letter-spacing:var(--ls-label); text-transform:uppercase; color:var(--text-low); margin-bottom:12px; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:520px; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Button, IconButton, Badge, StatusBadge, Input, Select, Checkbox, Icon, SegmentedFilter } = window.SpicedAnimeSpicyDesignSystem_daab0d;
+  function Eyebrow({children}){ return <div className="eyebrow">{children}</div>; }
+  function Demo(){
+    const [chk,setChk]=React.useState(true);
+    const [skuStatus,setSkuStatus]=React.useState('has');
+    return (
+      <div>
+        <div className="sec">
+          <Eyebrow>Buttons</Eyebrow>
+          <div className="row">
+            <Button variant="primary" iconLeft={<Icon name="file-output" size={15}/>}>Generate PPTX</Button>
+            <Button variant="secondary" iconLeft={<Icon name="lock" size={15}/>}>Lock Batch</Button>
+            <Button variant="outline">View All</Button>
+            <Button variant="ghost">Cancel</Button>
+            <Button variant="danger" iconLeft={<Icon name="octagon-x" size={15}/>}>Delete</Button>
+            <Button variant="secondary" loading>Saving</Button>
+            <Button variant="secondary" disabled>Disabled</Button>
+          </div>
+          <div className="row" style={{marginTop:10}}>
+            <Button variant="primary" size="sm">Small</Button>
+            <Button variant="primary" size="md">Medium</Button>
+            <Button variant="primary" size="lg">Large</Button>
+            <IconButton icon="bell" label="Alerts"/>
+            <IconButton icon="filter" label="Filter" active/>
+            <IconButton icon="more-horizontal" label="More" variant="solid"/>
+          </div>
+        </div>
+
+        <div className="sec">
+          <Eyebrow>SegmentedFilter — filters read differently from actions on purpose</Eyebrow>
+          <div className="row">
+            <SegmentedFilter options={[{value:'all',label:'All'},{value:'has',label:'Has SKU'},{value:'no',label:'No SKU'}]} value={skuStatus} onChange={setSkuStatus}/>
+          </div>
+        </div>
+
+        <div className="sec">
+          <Eyebrow>Status Badges</Eyebrow>
+          <div className="row">
+            {['Open','Queued for Production','In Production','Being Packaged','Locked for Review','Reprint Needed','Printed','Shipped','Ready','Blocked','Missing','Archived','Retired','Deferred MVP'].map(s=>
+              <StatusBadge key={s} status={s}/>
+            )}
+          </div>
+        </div>
+
+        <div className="sec">
+          <Eyebrow>Chips</Eyebrow>
+          <div className="row">
+            <Badge>142 units</Badge>
+            <Badge tone="spice">New</Badge>
+            <Badge tone="info">Priority</Badge>
+            <Badge tone="danger" solid>3</Badge>
+            <Badge tone="success">CSV ready</Badge>
+          </div>
+        </div>
+
+        <div className="sec">
+          <Eyebrow>Form Controls</Eyebrow>
+          <div className="grid2">
+            <Input label="Batch name" placeholder="One Piece tapestries"/>
+            <Input label="Search SKUs" iconLeft="search" placeholder="Search…"/>
+            <Input label="SKU" mono defaultValue="SA-TAP-ONEPIECE-01"/>
+            <Select label="Status" options={['All statuses','Open','In Production','Blocked']}/>
+          </div>
+          <div className="row" style={{marginTop:16}}>
+            <Checkbox checked={chk} onChange={setChk} label="Lock batch after generating"/>
+            <Checkbox indeterminate label="Select all"/>
+            <Checkbox disabled label="Unavailable"/>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body>
+</html>

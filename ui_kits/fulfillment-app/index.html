@@ -1,0 +1,211 @@
+<!-- @dsCard group="Fulfillment App" viewport="1440x900" name="Operator console" subtitle="Click-through recreation — Dashboard, Orders, Order Detail, Batches, Needs Attention, Artwork, Event Prints, Sandbox" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>SpicedAnime Fulfillment — Operator Console</title>
+<link rel="stylesheet" href="../../styles.css" />
+<style>html,body{margin:0;height:100%;background:var(--surface-app)}#root{height:100vh;min-width:1280px}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="Dashboard.jsx"></script>
+<script type="text/babel" src="Orders.jsx"></script>
+<script type="text/babel" src="OrderDetail.jsx"></script>
+<script type="text/babel" src="BatchDetail.jsx"></script>
+<script type="text/babel" src="NeedsAttention.jsx"></script>
+<script type="text/babel" src="ArtworkLibrary.jsx"></script>
+<script type="text/babel" src="EventPrints.jsx"></script>
+<script type="text/babel" src="Sandbox.jsx"></script>
+<script type="text/babel">
+const { AppShell, Button, Icon, StatusBadge, EmptyState, DeferredPanel, Card, DataTable, ErrorAlert, Select } = window.SpicedAnimeSpicyDesignSystem_daab0d;
+
+/* Nav per Screen Inventory §4. The Needs Attention badge counts Blocked
+   components (including NO_SKU); webhook failures are reported separately and
+   never contribute to it. */
+const NAV = [
+  { key: 'dashboard', label: 'Dashboard', icon: 'layout-dashboard', href: '#dashboard' },
+  { key: 'orders', label: 'Orders', icon: 'shopping-cart', href: '#orders' },
+  { key: 'batches', label: 'Current Batches', icon: 'layers', href: '#batches' },
+  { key: 'attention', label: 'Needs Attention', icon: 'triangle-alert', badge: 3, tone: 'danger', href: '#needs-attention' },
+  { key: 'artwork', label: 'Artwork Library', icon: 'image', href: '#artwork' },
+  { key: 'skus', label: 'SKU Manager', icon: 'tag', href: '#sku-manager' },
+  { key: 'packing', label: 'Packing Queue', icon: 'boxes', href: '#packing' },
+  { key: 'events', label: 'Event Prints', icon: 'printer', href: '#event-prints' },
+  { key: 'sandbox', label: 'Sandbox', icon: 'package', href: '#sandbox' },
+];
+const FOOTER_NAV = [
+  { key: 'audit', label: 'Audit Log', icon: 'scroll-text', href: '#audit-log' },
+  { key: 'settings', label: 'Settings', icon: 'settings', href: '#settings' },
+];
+
+const VIEWS = {
+  dashboard: { nav: 'dashboard', title: 'Dashboard', crumb: ['Operations', 'Dashboard'] },
+  orders: { nav: 'orders', title: 'Orders', crumb: ['Operations', 'Orders'] },
+  orderDetail: { nav: 'orders', title: 'Order #1034', crumb: ['Operations', 'Orders', '#1034'] },
+  batches: { nav: 'batches', title: 'Current Batches', crumb: ['Operations', 'Current Batches'] },
+  batchDetail: { nav: 'batches', title: 'Batch — Lighter #8', crumb: ['Operations', 'Current Batches', 'Lighter #8'] },
+  needsAttention: { nav: 'attention', title: 'Needs Attention', crumb: ['Operations', 'Needs Attention'] },
+  artwork: { nav: 'artwork', title: 'Artwork Library', crumb: ['Operations', 'Artwork Library'] },
+  skus: { nav: 'skus', title: 'SKU Manager', crumb: ['Operations', 'SKU Manager'] },
+  packing: { nav: 'packing', title: 'Packing Queue', crumb: ['Operations', 'Packing Queue'] },
+  events: { nav: 'events', title: 'Event Prints', crumb: ['Operations', 'Event Prints'] },
+  sandbox: { nav: 'sandbox', title: 'Sandbox', crumb: ['Operations', 'Sandbox'] },
+  audit: { nav: 'audit', title: 'Audit Log', crumb: ['Operations', 'Audit Log'] },
+  settings: { nav: 'settings', title: 'Settings', crumb: ['Operations', 'Settings'] },
+};
+
+function Settings() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+      <PageHeading eyebrow="System" title="Settings" />
+      <Card eyebrow="Integrations" title="CONNECTION STATUS">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          {[
+            ['Shopify', true, 'Last webhook 4m ago · API 2026-07'],
+            ['Google Drive', true, 'Root folder configured · last export 2026-09-02'],
+            ['Celery worker', false, 'Worker not reachable'],
+          ].map(([name, ok, detail]) => (
+            <div key={name} style={{ alignItems: 'center', borderBottom: '1px solid var(--line-soft)', display: 'flex', gap: 16, paddingBottom: 14 }}>
+              <span style={{ color: 'var(--text-hi)', fontSize: 13, fontWeight: 600, width: 170 }}>{name}</span>
+              <StatusBadge status={ok ? 'Available' : 'Failed'} label={ok ? 'Connected' : 'Not connected'} size="sm" />
+              <Mono style={{ color: 'var(--text-low)', fontSize: 12 }}>{detail}</Mono>
+            </div>
+          ))}
+        </div>
+        <p style={{ color: 'var(--text-low)', fontSize: 11, margin: '16px 0 0' }}>
+          Read-only for MVP. Credential rotation happens through server-side environment variables, never through the app. Secret values are never returned by the API.
+        </p>
+      </Card>
+      <DeferredPanel title="Multi-user accounts" eta="post-MVP">
+        The app runs on a single admin login. Roles, per-user audit attribution and team permissions are planned for a later phase.
+      </DeferredPanel>
+      <StatusGuide label="Status guide" groups={[{ title: 'Integration health', entries: [
+        { status: 'Available', meaning: 'Connected and reachable.' },
+        { status: 'Failed', meaning: 'Not connected, or the worker is unreachable.' },
+      ] }]} />
+    </div>
+  );
+}
+
+const PACKING_EXPORTS = [
+  { id: 1, exported: '2026-09-01 08:14', start: '2026-08-18', end: '2026-08-31', status: 'Success', file: 'PACKING-20260901-004.xlsx' },
+  { id: 2, exported: '2026-08-18 07:52', start: '2026-08-04', end: '2026-08-17', status: 'Success', file: 'PACKING-20260818-003.xlsx' },
+  { id: 3, exported: '2026-08-04 09:31', start: '2026-07-21', end: '2026-08-03', status: 'Failed', file: null },
+];
+
+function Packing() {
+  const [range, setRange] = React.useState('Since last export');
+  const clamped = range === 'Custom — 45 days';
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+      <PageHeading
+        eyebrow="Shipping" title="Packing Queue"
+        right={<Button variant="primary" iconLeft={<Icon name="file-output" size={15} />}>Trigger export</Button>}
+      />
+
+      <Card eyebrow="Export window" title="SELECT RANGE">
+        <div style={{ alignItems: 'center', display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <Select options={['Since last export', 'Custom — 14 days', 'Custom — 45 days']} value={range} onChange={(e) => setRange(e.target.value)} />
+          <Muted style={{ fontSize: 12 }}>Covers produced, non-produced and deferred items in one combined sheet.</Muted>
+        </div>
+        {/* Verbatim operator-facing copy from Decision #106. */}
+        {clamped && (
+          <div style={{ marginTop: 14 }}>
+            <ErrorAlert tone="warning" title="Export limit reached (30 days max).">
+              Exporting the first 30 days now. Please run another export for the remaining dates once this completes.
+            </ErrorAlert>
+          </div>
+        )}
+      </Card>
+
+      <ScreenSection eyebrow="History" title="PAST EXPORTS">
+        {/* No redundant generated-name column — Window Start and Window End
+            already carry that information (Decision #106). */}
+        <DataTable
+          rowKey="id" rows={PACKING_EXPORTS}
+          columns={[
+            { key: 'exported', header: 'Export date', mono: true, width: 170 },
+            { key: 'start', header: 'Window start', mono: true, width: 140 },
+            { key: 'end', header: 'Window end', mono: true, width: 140 },
+            { key: 'status', header: 'Status', width: 130, render: (v) => <StatusBadge status={v} size="sm" /> },
+            { key: 'file', header: 'File', render: (v) => v ? <a href="#drive"><Mono style={{ fontSize: 11 }}>{v}</Mono></a> : <Muted>—</Muted> },
+          ]}
+          emptyLabel="No exports yet"
+        />
+      </ScreenSection>
+
+      <StatusGuide label="Status guide" groups={[{ title: 'Export job', entries: [
+        { status: 'Pending', meaning: 'Queued or running.' },
+        { status: 'Success', meaning: 'Sheet generated and saved to Drive.' },
+        { status: 'Failed', meaning: 'Generation failed. Retry the export.' },
+      ] }]} />
+    </div>
+  );
+}
+
+/* Screens whose source I did not read closely enough to recreate faithfully.
+   The kit states the gap rather than inventing a design. */
+function NotRecreated({ title, eyebrow, icon, body }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+      <PageHeading eyebrow={eyebrow} title={title} />
+      <EmptyState icon={icon} title="NOT RECREATED IN THIS KIT">{body}</EmptyState>
+    </div>
+  );
+}
+
+function App() {
+  const [view, setView] = React.useState(() => (VIEWS[location.hash.slice(1)] ? location.hash.slice(1) : 'dashboard'));
+  const meta = VIEWS[view] || VIEWS.dashboard;
+  const go = (v) => { setView(v); location.hash = v; };
+
+  let content;
+  if (view === 'dashboard') content = <Dashboard go={go} />;
+  else if (view === 'orders') content = <Orders go={go} />;
+  else if (view === 'orderDetail') content = <OrderDetail go={go} />;
+  else if (view === 'batches') content = <Batches go={go} />;
+  else if (view === 'batchDetail') content = <BatchDetail go={go} />;
+  else if (view === 'needsAttention') content = <NeedsAttention />;
+  else if (view === 'artwork') content = <ArtworkLibrary />;
+  else if (view === 'events') content = <EventPrints />;
+  else if (view === 'sandbox') content = <Sandbox />;
+  else if (view === 'settings') content = <Settings />;
+  else if (view === 'packing') content = <Packing />;
+  else if (view === 'skus') content = (
+    <NotRecreated
+      title="SKU Manager" eyebrow="Operations" icon="tag"
+      body="SKU Manager reads the live Shopify catalog, generates canonical SKUs, and exports a cumulative full-product CSV for manual Shopify import. Its screen source was not read closely enough to recreate faithfully, so it is left blank rather than invented."
+    />
+  );
+  else content = (
+    <NotRecreated
+      title="Audit Log" eyebrow="Operations" icon="scroll-text"
+      body="The audit log is a read-only paginated timeline of audit events and deliberately has no Status Guide. See the Recent Activity panel on the Dashboard for the same row shape."
+    />
+  );
+
+  return (
+    <AppShell
+      active={meta.nav}
+      onNavigate={(key) => go(Object.keys(VIEWS).find((v) => VIEWS[v].nav === key) || 'dashboard')}
+      sidebarProps={{
+        logoSrc: '../../assets/spicedanime-icon.png', operator: 'Josiah', operatorRole: 'Operator',
+        nav: NAV, footerNav: FOOTER_NAV,
+      }}
+      topBarProps={{ title: meta.title, breadcrumb: meta.crumb, notifications: 3, onSearch: () => {} }}
+    >
+      {content}
+    </AppShell>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

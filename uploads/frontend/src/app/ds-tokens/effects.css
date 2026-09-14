@@ -1,0 +1,35 @@
+/* SpicedAnime Fulfillment — Effects: radii, borders, shadows, motion, textures
+   Slightly sharp corners (raw/punk), borders carry elevation on dark, shadows subtle. */
+:root {
+  /* ---- Corner radii (kept tight; avoids generic "soft SaaS" look) ---- */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 5px;   /* default control / card */
+  --radius-lg: 8px;   /* large panels */
+  --radius-pill: 999px;
+
+  /* ---- Border widths ---- */
+  --border-hair: 1px;
+  --border-raw: 1.5px;   /* slightly raw divider accent */
+
+  /* ---- Shadows (dark theme: mostly structural, low elevation) ---- */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-card: 0 1px 0 rgba(255,255,255,0.03) inset, 0 6px 18px rgba(0,0,0,0.38);
+  --shadow-pop: 0 1px 0 rgba(255,255,255,0.04) inset, 0 18px 48px rgba(0,0,0,0.55);
+  --shadow-spice: 0 0 0 1px rgba(255,77,46,0.4), 0 8px 24px rgba(255,77,46,0.18);
+
+  /* ---- Focus ---- */
+  --ring: 0 0 0 2px var(--ink-900), 0 0 0 4px var(--focus-ring);
+
+  /* ---- Motion (fast, mechanical — production tool, not playful) ---- */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.3, 1); /* @kind other */
+  --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1); /* @kind other */
+  --dur-fast: 110ms; /* @kind other */
+  --dur-base: 170ms; /* @kind other */
+  --dur-slow: 240ms; /* @kind other */
+
+  /* ---- Texture accents (decorative areas only — headers, empty states) ---- */
+  --tex-halftone: url('/assets/halftone-tile.png'); /* @kind other */
+  --tex-hatch: url('/assets/hatch-tile.png'); /* @kind other */
+}

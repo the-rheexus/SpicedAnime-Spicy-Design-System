@@ -1,0 +1,2 @@
+order_number,customer_name,sales_channel,email,shipping_name,shipping_address,items_ordered,production_groups,print_status,label_status,packed_status,tracking_status,deferred_items
+1004,Liam Okafor,Shopify,mixedcart@example.com,Liam Okafor,"55 Harbor St, Portland, Oregon, 97205, United States","Desert Nomad Flip Lighter x 1, Akira Tapestry x 1","Lighter, Non-Produced",Printed,,,,

@@ -1,0 +1,22 @@
+{
+  "id": 8800000000001,
+  "order_id": 5500000000004,
+  "created_at": "2026-08-14T09:15:00-04:00",
+  "note": "Customer changed their mind about the lighter",
+  "restock": false,
+  "refund_line_items": [
+    {
+      "id": 9900000000001,
+      "line_item_id": 13200000000004,
+      "quantity": 1
+    }
+  ],
+  "transactions": [
+    {
+      "id": 12300000000001,
+      "kind": "refund",
+      "status": "success",
+      "amount": "45.00"
+    }
+  ]
+}

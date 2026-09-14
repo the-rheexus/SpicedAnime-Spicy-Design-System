@@ -1,0 +1,100 @@
+/* SpicedAnime Fulfillment — Color System
+   Dark/charcoal foundation, warm off-white text, single "spice" brand accent,
+   and a strong status tone system (color is ALWAYS paired with icon + label). */
+:root {
+  /* ---- Foundation: charcoal/ink ramp (warm-neutral, near black) ---- */
+  --ink-1000: #0A0B0D;   /* app backdrop, deepest */
+  --ink-900:  #0E0F12;   /* app background */
+  --ink-850:  #131418;   /* sunken / rail */
+  --ink-800:  #17191D;   /* surface / panel */
+  --ink-750:  #1C1E23;   /* card */
+  --ink-700:  #23262C;   /* raised card / row hover */
+  --ink-650:  #2B2E35;   /* control bg */
+  --ink-600:  #34373F;   /* strong fill */
+
+  /* ---- Hairlines & borders (raw, low-opacity white) ---- */
+  --line:        rgba(255,255,255,0.08);
+  --line-soft:   rgba(255,255,255,0.05);
+  --line-strong: rgba(255,255,255,0.16);
+  --line-spice:  rgba(255,77,46,0.55);
+
+  /* ---- Text: warm off-white ramp ---- */
+  --text-hi:    #F4F2EC;   /* primary, headings */
+  --text-mid:   #A9ADB5;   /* secondary / body */
+  --text-low:   #71757D;   /* tertiary / meta */
+  --text-faint: #4A4E55;   /* disabled / placeholder */
+  --text-on-spice: #120A07; /* text on the spice accent */
+
+  /* ---- Brand accent: SPICE (vermilion red-orange) ---- */
+  --spice-300: #FF8A6E;
+  --spice-400: #FF6B4F;
+  --spice-500: #FF4D2E;   /* primary brand / primary action */
+  --spice-600: #E63916;   /* hover/press */
+  --spice-700: #BE2C0F;   /* active/press deep */
+  --spice-tint: rgba(255,77,46,0.12);
+
+  /* ---- Status tones (each = base / tint bg / border) ----
+     Decision #74 (P95 B1) + two owner-directed revisions in P95: (1) lifted for
+     WCAG AA, (2) re-saturated so the badges read vivid rather than pastel (the
+     first lift left the red looking salmon). Each hue keeps the same
+     relationship to the others. The label clears WCAG 2.2 AA (>= 4.5:1) on the
+     dark surfaces in every context except a status badge inside a table row
+     while that row is hovered, where Danger/Warning sit at ~4.4:1 (owner-
+     accepted — badges always pair colour with an icon + label). The -bg and
+     -line tints are the same colour at a shared low alpha so background and
+     border stay in harmony with the tone. Full mapping: Frontend_Color_System.md.
+     Presentation only — no canonical lifecycle string or enum value changes. */
+  --tone-info:        #6FA0F5;   /* Info/Blue — Open, Queued, Queued for Production */
+  --tone-info-bg:     rgba(111,160,245,0.13);
+  --tone-info-line:   rgba(111,160,245,0.42);
+
+  --tone-progress:    #E0A62E;   /* Progress/Yellow — In Production */
+  --tone-progress-bg: rgba(224,166,46,0.13);
+  --tone-progress-line: rgba(224,166,46,0.42);
+
+  --tone-success:     #4CBF74;   /* Success/Green — Printed, Ready, Available, Fulfilled Externally */
+  --tone-success-bg:  rgba(76,191,116,0.13);
+  --tone-success-line:rgba(76,191,116,0.42);
+
+  --tone-warning:     #F0803C;   /* Warning/Amber — Locked for Review, Reprint Needed, In Production (Needs Reprint) */
+  --tone-warning-bg:  rgba(240,128,60,0.13);
+  --tone-warning-line:rgba(240,128,60,0.42);
+
+  --tone-danger:      #F27351;   /* Danger/Red — Blocked, Missing, Failed */
+  --tone-danger-bg:   rgba(242,115,81,0.13);
+  --tone-danger-line: rgba(242,115,81,0.42);
+
+  --tone-neutral:     #9AA0BE;   /* Neutral/Gray — Canceled, Archived, Retired, Deferred MVP */
+  --tone-neutral-bg:  rgba(154,160,190,0.13);
+  --tone-neutral-line:rgba(154,160,190,0.42);
+
+  /* ---- Grouping accent: PAIRS (Decision #86) ----
+     One violet, used solely to mark components that move together as a unit —
+     the front/back pairs LITF/LITB and WALF/WALB — as a bracket on the left
+     edge of the grouped rows plus a "PAIR" label. Like the spice accent this is
+     NOT a status colour: it carries no lifecycle meaning and never replaces a
+     status badge. Full mapping: Frontend_Color_System.md. */
+  --group-pair:      #D4ADF4;   /* "PAIR" label text */
+  --group-pair-line: #AD7BDB;   /* bracket rule on grouped rows */
+
+  /* ---- Semantic surface aliases ---- */
+  --surface-app:    var(--ink-900);
+  --surface-rail:   var(--ink-850);
+  --surface-panel:  var(--ink-800);
+  --surface-card:   var(--ink-750);
+  --surface-raised: var(--ink-700);
+  --surface-control:var(--ink-650);
+  --surface-hover:  var(--ink-700);
+
+  /* ---- Semantic text aliases ---- */
+  --text-heading: var(--text-hi);
+  --text-body:    var(--text-mid);
+  --text-meta:    var(--text-low);
+  --text-disabled:var(--text-faint);
+
+  /* ---- Action aliases ---- */
+  --action-primary:       var(--spice-500);
+  --action-primary-hover: var(--spice-600);
+  --action-primary-press: var(--spice-700);
+  --focus-ring: rgba(255,77,46,0.55);
+}

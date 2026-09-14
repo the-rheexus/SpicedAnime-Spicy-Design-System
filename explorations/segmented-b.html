@@ -1,0 +1,55 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css"><style>
+body{background:var(--surface-app);margin:0;padding:48px;font-family:var(--font-sans);color:var(--text-hi)}
+.cap{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--spice-400);margin-bottom:6px}
+.cap-sub{font-size:13px;color:var(--text-low);margin-bottom:28px;max-width:640px;line-height:1.5}
+.panel{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;padding:16px;background:var(--surface-panel);border:1px solid var(--line);border-radius:var(--radius-md)}
+.field{display:flex;flex-direction:column;gap:8px}
+.flabel{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-low)}
+.search{flex:0 1 300px}
+.search-box{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;background:var(--ink-850);border:1px solid var(--line-strong);border-radius:var(--radius-md)}
+.search-box input{border:none;outline:none;background:transparent;color:var(--text-hi);font-family:var(--font-sans);font-size:14px;width:100%}
+.search-box svg{width:16px;height:16px;color:var(--text-low);flex:none}
+select{height:36px;padding:0 12px;background:var(--ink-850);border:1px solid var(--line-strong);border-radius:var(--radius-md);color:var(--text-hi);font-family:var(--font-sans);font-size:14px;min-width:160px}
+.segmented{display:flex;gap:6px}
+.seg{display:flex;align-items:center;gap:6px;height:36px;padding:0 14px;background:transparent;border:1px solid var(--line-strong);border-radius:var(--radius-sm);color:var(--text-mid);font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.seg svg{width:13px;height:13px;display:none}
+.seg.active{background:var(--spice-tint);color:var(--spice-400);border-color:var(--line-spice)}
+.seg.active svg{display:block}
+.clear-btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;background:transparent;border:1px solid transparent;border-radius:var(--radius-sm);color:var(--text-mid);font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer}
+.clear-btn svg{width:14px;height:14px}
+.clear-btn:hover{background:var(--surface-hover);color:var(--text-hi)}
+.divider{height:1px;background:var(--line);margin:40px 0 28px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;height:38px;padding:0 16px;font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:var(--radius-md);cursor:pointer}
+.btn.primary{background:var(--spice-500);color:var(--text-on-spice);border:1px solid var(--spice-500)}
+.btn.secondary{background:var(--surface-control);color:var(--text-hi);border:1px solid var(--line-strong)}
+.btn.outline{background:transparent;color:var(--text-hi);border:1px solid var(--line-strong)}
+.btn.ghost{background:transparent;color:var(--text-mid);border:1px solid transparent}
+.btn.danger{background:var(--tone-danger-bg);color:var(--tone-danger);border:1px solid var(--tone-danger-line)}
+</style></head><body>
+<div class="cap">Option B — Detached tight-radius segments</div>
+<div class="cap-sub">Same idea as today's pill filters, minus the pill — square radius-sm boxes with a small 6px gap. Lightest change from current code, keeps each option as its own hit target, drops the "soft SaaS" rounded-pill look the system's own rules warn against.</div>
+<div class="panel">
+  <div class="field search"><div class="flabel">Search catalog</div><div class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input placeholder="Search product name or canonical SKU…"></div></div>
+  <div class="field"><div class="flabel">Product type</div><select><option>All types</option></select></div>
+  <div class="field">
+    <div class="flabel">SKU status</div>
+    <div class="segmented">
+      <button class="seg">All</button>
+      <button class="seg active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Has SKU</button>
+      <button class="seg">No SKU</button>
+    </div>
+  </div>
+  <button class="clear-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>Clear</button>
+</div>
+<div class="divider"></div>
+<div class="cap">For contrast — standalone action buttons (unchanged)</div>
+<div class="actions">
+  <button class="btn primary">Generate PPTX</button>
+  <button class="btn secondary">Export CSV</button>
+  <button class="btn outline">View Details</button>
+  <button class="btn ghost">Cancel</button>
+  <button class="btn danger">Delete Batch</button>
+</div>
+<script>document.querySelectorAll('.seg').forEach(b=>b.onclick=()=>{b.parentElement.querySelectorAll('.seg').forEach(x=>x.classList.remove('active'));b.classList.add('active')})</script>
+</body></html>

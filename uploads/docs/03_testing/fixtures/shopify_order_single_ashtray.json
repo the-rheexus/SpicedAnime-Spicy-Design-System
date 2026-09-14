@@ -1,0 +1,32 @@
+{
+  "id": 5500000000001,
+  "order_number": 1001,
+  "email": "ashbuyer@example.com",
+  "financial_status": "paid",
+  "fulfillment_status": null,
+  "created_at": "2026-06-15T09:14:00-04:00",
+  "currency": "USD",
+  "customer": {
+    "first_name": "Maya",
+    "last_name": "Reyes"
+  },
+  "shipping_address": {
+    "name": "Maya Reyes",
+    "address1": "418 Birchwood Ave",
+    "city": "Columbus",
+    "province": "Ohio",
+    "zip": "43004",
+    "country": "United States"
+  },
+  "line_items": [
+    {
+      "id": 13200000000001,
+      "product_id": 7000000000001,
+      "variant_id": 41000000000001,
+      "sku": "ASH-CHARFRIE-SOLO",
+      "quantity": 1,
+      "title": "Charizard & Friends Ashtray",
+      "variant_title": "Ashtray only"
+    }
+  ]
+}

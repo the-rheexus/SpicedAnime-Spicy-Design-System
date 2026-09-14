@@ -1,0 +1,65 @@
+<!-- @dsCard group="Effects" viewport="700x400" name="Stripes — approved placements" subtitle="Panel headers and empty states. Never behind small or non-bold text — that stays dots." -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><link rel="stylesheet" href="../../styles.css" /><style>html,body{margin:0;background:var(--surface-app);font-family:var(--font-sans);color:var(--text-hi)}.pad{padding:20px 22px}.lbl{font-size:9px;font-weight:700;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--text-low)}.mono{font-family:var(--font-mono)}.cap{font-family:var(--font-mono);font-size:10px;color:var(--text-low);margin-top:8px}.ok{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tone-success)}.no{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tone-danger)}</style></head><body class="pad">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+
+  <div>
+    <div class="ok">Approved · panel header</div>
+    <div style="background:var(--surface-card);border:1px solid var(--line);border-radius:var(--radius-md);box-shadow:var(--shadow-card);overflow:hidden;margin-top:7px">
+      <div style="background-color:var(--ink-850);background-image:var(--tex-stripe-medium);border-bottom:1px solid var(--line);padding:12px 16px">
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--spice-400)">Production</div>
+        <div style="font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:3px">Active Batches</div>
+      </div>
+      <div style="padding:12px 16px;display:flex;flex-direction:column;gap:7px">
+        <div style="display:flex;justify-content:space-between;white-space:nowrap"><span style="font-size:11px;color:var(--text-mid)">Lighter #8</span><span class="mono" style="font-size:11px;color:var(--text-low)">open</span></div>
+        <div style="display:flex;justify-content:space-between;white-space:nowrap"><span style="font-size:11px;color:var(--text-mid)">Ashtray #12</span><span class="mono" style="font-size:11px;color:var(--text-low)">open</span></div>
+      </div>
+    </div>
+    <div class="cap">Stripes stop at the header. Row data sits on flat surface.</div>
+  </div>
+
+  <div>
+    <div class="ok">Approved · empty state</div>
+    <!-- Mirrors EmptyState.jsx: wide stripes layered over halftone on the
+         backdrop at .5 opacity, and again inside the 56px medallion. -->
+    <div style="position:relative;overflow:hidden;background:var(--surface-card);border:1px dashed var(--line-strong);border-radius:var(--radius-md);padding:20px;text-align:center;margin-top:7px">
+      <span class="tex-stripes-halftone" style="position:absolute;inset:0;opacity:.5;pointer-events:none"></span>
+      <div style="position:relative;width:56px;height:56px;margin:0 auto;background-color:var(--ink-850);background-image:var(--tex-stripe-wide);border:1.5px solid var(--line-strong);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:var(--text-low)">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div style="position:relative;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:12px">No blocked components</div>
+    </div>
+    <div class="cap">Stripes over halftone on backdrop and medallion. Heading is bold uppercase.</div>
+  </div>
+
+  <div>
+    <div class="ok">Dots, not stripes · held panel</div>
+    <!-- Real DeferredPanel.jsx geometry: --surface-card fill, plain --line
+         border (the neutral tone is confined to the badge pill), 20px 22px
+         padding, hatch at .6 opacity. Its body copy is 13px and non-bold, so
+         stripes are disallowed here by the legibility rule. -->
+    <div style="position:relative;overflow:hidden;background:var(--surface-card);border:1px solid var(--line);border-radius:var(--radius-md);padding:20px 22px;margin-top:7px">
+      <span class="tex-hatch" style="position:absolute;inset:0;opacity:.6;pointer-events:none"></span>
+      <div style="position:relative">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;background:var(--tone-neutral-bg);border:1px solid var(--tone-neutral-line);border-radius:var(--radius-sm);color:var(--tone-neutral);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M5 12h14"/></svg> Deferred — MVP
+          </span>
+        </div>
+        <div style="font-size:15px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;color:var(--text-mid)">Grinder production</div>
+        <div style="font-size:13px;line-height:1.55;color:var(--text-low);margin-top:7px">Held for a later phase. Never blocks an order.</div>
+      </div>
+    </div>
+    <div class="cap">Hatch keeps 13px body copy legible. Neutral tone stays in the pill.</div>
+  </div>
+
+  <div>
+    <div class="no">Not approved · small / non-bold text</div>
+    <div style="background-color:var(--surface-card);background-image:var(--tex-stripe-fine);border:1px solid var(--tone-danger-line);border-radius:var(--radius-md);padding:16px 18px;margin-top:7px">
+      <div class="lbl">Open batches</div>
+      <div class="mono" style="font-size:30px;font-weight:700;line-height:1;margin-top:8px">6</div>
+      <div style="font-size:11px;color:var(--text-low);margin-top:4px">active groups · 2 locked for review</div>
+    </div>
+    <div class="cap">Even the finest stripe competes with light letterforms at 11px.</div>
+  </div>
+
+</div></body></html>

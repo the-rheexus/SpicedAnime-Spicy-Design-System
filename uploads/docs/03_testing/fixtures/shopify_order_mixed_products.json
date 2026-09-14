@@ -1,0 +1,41 @@
+{
+  "id": 5500000000004,
+  "order_number": 1004,
+  "email": "mixedcart@example.com",
+  "financial_status": "paid",
+  "fulfillment_status": null,
+  "created_at": "2026-06-15T12:45:00-04:00",
+  "currency": "USD",
+  "customer": {
+    "first_name": "Liam",
+    "last_name": "Okafor"
+  },
+  "shipping_address": {
+    "name": "Liam Okafor",
+    "address1": "55 Harbor St",
+    "city": "Portland",
+    "province": "Oregon",
+    "zip": "97205",
+    "country": "United States"
+  },
+  "line_items": [
+    {
+      "id": 13200000000004,
+      "product_id": 7000000000004,
+      "variant_id": 41000000000004,
+      "sku": "LIT-DESNAM-SIL-TOR-SOLO",
+      "quantity": 1,
+      "title": "Desert Nomad Flip Lighter",
+      "variant_title": "Silver / Torch"
+    },
+    {
+      "id": 13200000000005,
+      "product_id": 7000000000005,
+      "variant_id": 41000000000005,
+      "sku": "TAP-AKIRA-LRG-NONE",
+      "quantity": 1,
+      "title": "Akira Tapestry",
+      "variant_title": "Large"
+    }
+  ]
+}
